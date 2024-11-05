@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,13 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-=$t-vsu6^kf_d!3)vc)qwpqv7=ex_$jaj6xw$%o6309w#gjuc='
+SECRET_KEY = "django-insecure-=$t-vsu6^kf_d!3)vc)qwpqv7=ex_$jaj6xw$%o6309w"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG')
+DEBUG = True
+
 
 ALLOWED_HOSTS = ['*']
-load_dotenv()
 
 # Application definition
 
@@ -85,9 +86,16 @@ WSGI_APPLICATION = 'ElevateMe.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default="sqlite:///" + os.path.join(BASE_DIR, "db.sqlite3")
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'elevatemedb',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {'init_command': 'SET SQL_MODE=STRICT_TRANS_TABLES'},
+
+    }
 }
 
 # Password validation
